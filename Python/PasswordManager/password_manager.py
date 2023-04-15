@@ -62,5 +62,8 @@ def create_pw():
 def edit_pw():
     return None
 
+def end():
+    return sys.exit()
+
 
 

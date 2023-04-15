@@ -1,5 +1,4 @@
 from password_manager import *
-from gui import *
 
 #main function    
 def main():
@@ -29,7 +28,7 @@ def main():
                     edit_pw()
                     break
                 elif user_choice == '4':
-                    sys.exit()
+                    end()
                 else:
                     print("Invalid choice, please enter either '1', '2', '3', or '4' to proceed.")
         else:
