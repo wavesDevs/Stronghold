@@ -63,7 +63,7 @@ def edit_pw():
     return None
 
 def end():
-    return sys.exit()
+    sys.exit()
 
 
 
