@@ -22,10 +22,10 @@ def main():
                     display_pw(passwords)
                     break
                 elif user_choice == '2':
-                    create_pw()
+                    create_pw(passwords)
                     break
                 elif user_choice == '3':
-                    edit_pw()
+                    edit_pw(passwords)
                     break
                 elif user_choice == '4':
                     end()
