@@ -6,7 +6,6 @@ from passwordGenerator import *
 # Limitations
 # This GUI has functional windows and buttons, however is not fully finished.
 # Buttons currently print to console, which would ideally have implementation within the window instead.
-# However, for the purpose of this project, the logic itself was more important, and the GUI is more of a quality of life feature.
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -23,7 +22,7 @@ def main_window():
     global screen
     screen = customtkinter.CTk()
     screen.geometry("1280x720")
-    screen.title("wavesDev Password Manager")
+    screen.title("Stronghold")
 
     # unused frame here for reference.
     # frame = customtkinter.CTkFrame(master=screen)
@@ -51,7 +50,7 @@ def initial_window():
     global root
     root = customtkinter.CTk()
     root.geometry("500x250")
-    root.title("wavesDev Password Manager")
+    root.title("Stronghold")
 
     frame = customtkinter.CTkFrame(master=root)
     frame.pack(pady=20, padx=60, fill="both", expand=True)
