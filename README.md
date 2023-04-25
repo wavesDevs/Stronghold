@@ -27,7 +27,7 @@ A Python based password manager.
 ## Screenshots
 
 ### Master Password
-<img src = "https://imgur.com/G9dKmNs.png">
+<img src = "https://imgur.com/LChYbG7.png">
 
 ### Main Window
 - (Coming Soon)
