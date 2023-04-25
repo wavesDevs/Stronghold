@@ -28,3 +28,6 @@ A Python based password manager.
 
 ### Master Password
 <img src = "https://imgur.com/G9dKmNs.png">
+
+### Main Window
+- (Coming Soon)
