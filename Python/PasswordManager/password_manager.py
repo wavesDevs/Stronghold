@@ -3,6 +3,7 @@ import sys
 import passwordGenerator
 import customtkinter
 import tkinter.scrolledtext as tkst
+import tkinter
 
 #defining password list with dictionaries
 passwords = [
@@ -50,10 +51,6 @@ def check_master(input):
 
 #display function for password list.    
 def display_pw(passwords, master):
-    # #formatting for clean visual in console
-    # print("\n{:<7} {:<20} {:<20} {:<40} {:<20} {:<20}".format("Index", "Website", "Username", "Password", "Date Modified", "Date Added"))
-    # print("-" * 125)
-
     # GUI implementation
     # global variables
     global password_frame, text_widget
@@ -71,6 +68,11 @@ def display_pw(passwords, master):
     text_widget = tkst.ScrolledText(password_frame, wrap='word')
     text_widget.configure(font=("Source Code Pro Medium", 10), bg="#212121", fg='white' , borderwidth=0 ,highlightbackground="#212121", highlightcolor='#212121', highlightthickness=0)
     text_widget.pack(fill='both', expand=True)
+
+    # styling scrollbar and linking to text_widget
+    scrollbar = tkinter.Scrollbar(password_frame, orient='vertical', command=text_widget.yview)
+    text_widget.configure(yscrollcommand=scrollbar.set)
+    scrollbar.config(bg="#212121", troughcolor="#212121", activebackground="#212121", highlightcolor="#212121", highlightthickness=0)
     
     # header formatting, with line to separate headers from data. 
     # header_len = len(f"{'Index':<10} {'Website':<30} {'Username':<20} {'Password':<40} {'Date Modified':<20} {'Date Added':<20}")
@@ -97,10 +99,6 @@ def display_pw(passwords, master):
             date_added = datetime.datetime.strptime(password["date_added"], "%Y-%m-%d").strftime("%Y-%m-%d")
 
         text_widget.insert('end', f"{i:<10} {website:<20} {username:<20} {password_str:<30} {date_modified:<20} {date_added:<20}\n")
-
-        #print("{:<10} {:<20} {:<20} {:<30} {:<20} {:<20}".format(i, password['website'], password['username'] ,password['password'], date_modified, date_added))
-    
-    #print("\n")
 
 #function to create a new password and append it to password list
 def create_pw(passwords):
