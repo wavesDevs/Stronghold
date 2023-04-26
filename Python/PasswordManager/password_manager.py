@@ -1,6 +1,8 @@
 import datetime
 import sys
 import passwordGenerator
+import customtkinter
+import tkinter.scrolledtext as tkst
 
 #defining password list with dictionaries
 passwords = [
@@ -27,8 +29,12 @@ passwords = [
     }
 ]
 
-#hard-coding master password
+#hard-coding master password. DB storage/retrieval should be implemented
 master_pw = "1234"
+
+#global variables from display_pw(). necessary to initialize in order to destroy it upon calling display_pw(), so that data can be updated without adding extra frames.
+text_widget = None
+password_frame = None
 
 #function to retrieve master password (ideally from secure location later, for now its hard-coded)
 def get_master():
@@ -43,12 +49,35 @@ def check_master(input):
         return False
 
 #display function for password list.    
-def display_pw(passwords):
-    #formatting for clean visual in console
-    print("\n{:<7} {:<20} {:<20} {:<40} {:<20} {:<20}".format("Index", "Website", "Username", "Password", "Date Modified", "Date Added"))
-    print("-" * 125)
+def display_pw(passwords, master):
+    # #formatting for clean visual in console
+    # print("\n{:<7} {:<20} {:<20} {:<40} {:<20} {:<20}".format("Index", "Website", "Username", "Password", "Date Modified", "Date Added"))
+    # print("-" * 125)
 
-    #display logic. iterates through passwords list and prints each item of the password dictionary separately, formatted.
+    # GUI implementation
+    # global variables
+    global password_frame, text_widget
+
+    # if a password frame already exists, destroy all widgets, Allows for updating data without creating new frames.
+    if not password_frame:
+        password_frame = customtkinter.CTkFrame(master=master)
+        password_frame.pack(fill='both', expand=True, padx=20, pady=20)
+    else:
+        # Clear the contents of the password frame
+        for widget in password_frame.winfo_children():
+            widget.destroy()
+
+    # creating widget for password list, configuring settings
+    text_widget = tkst.ScrolledText(password_frame, wrap='word')
+    text_widget.configure(font=("Source Code Pro Medium", 10), bg="#212121", fg='white' , borderwidth=0 ,highlightbackground="#212121", highlightcolor='#212121', highlightthickness=0)
+    text_widget.pack(fill='both', expand=True)
+    
+    # header formatting, with line to separate headers from data. 
+    # header_len = len(f"{'Index':<10} {'Website':<30} {'Username':<20} {'Password':<40} {'Date Modified':<20} {'Date Added':<20}")
+    header_line = '-' * 118
+    text_widget.insert('end', f"{'Index':<10} {'Website':<20} {'Username':<20} {'Password':<30} {'Date Modified':<20} {'Date Added':<20}\n" + header_line + "\n", 'header')
+
+    #display logic
     for i, password in enumerate(passwords, start=1):
         website = password["website"]
         password_str = password["password"]
@@ -67,9 +96,11 @@ def display_pw(passwords):
         else:
             date_added = datetime.datetime.strptime(password["date_added"], "%Y-%m-%d").strftime("%Y-%m-%d")
 
-        print("{:<7} {:<20} {:<20} {:<40} {:<20} {:<20}".format(i, password['website'], password['username'] ,password['password'], date_modified, date_added))
+        text_widget.insert('end', f"{i:<10} {website:<20} {username:<20} {password_str:<30} {date_modified:<20} {date_added:<20}\n")
+
+        #print("{:<10} {:<20} {:<20} {:<30} {:<20} {:<20}".format(i, password['website'], password['username'] ,password['password'], date_modified, date_added))
     
-    print("\n")
+    #print("\n")
 
 #function to create a new password and append it to password list
 def create_pw(passwords):

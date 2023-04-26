@@ -1,0 +1,1 @@
+font=customtkinter.CTkFont(size=20, weight="bold")
