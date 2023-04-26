@@ -65,14 +65,9 @@ def display_pw(passwords, master):
             widget.destroy()
 
     # creating widget for password list, configuring settings
-    text_widget = tkst.ScrolledText(password_frame, wrap='word')
+    text_widget = tkinter.Text(password_frame, wrap='word')
     text_widget.configure(font=("Source Code Pro Medium", 10), bg="#212121", fg='white' , borderwidth=0 ,highlightbackground="#212121", highlightcolor='#212121', highlightthickness=0)
     text_widget.pack(fill='both', expand=True)
-
-    # styling scrollbar and linking to text_widget
-    scrollbar = tkinter.Scrollbar(password_frame, orient='vertical', command=text_widget.yview)
-    text_widget.configure(yscrollcommand=scrollbar.set)
-    scrollbar.config(bg="#212121", troughcolor="#212121", activebackground="#212121", highlightcolor="#212121", highlightthickness=0)
     
     # header formatting, with line to separate headers from data. 
     # header_len = len(f"{'Index':<10} {'Website':<30} {'Username':<20} {'Password':<40} {'Date Modified':<20} {'Date Added':<20}")
@@ -135,6 +130,3 @@ def edit_pw(passwords):
 
 def end():
     sys.exit()
-
-
-
