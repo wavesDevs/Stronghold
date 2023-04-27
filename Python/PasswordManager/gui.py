@@ -41,7 +41,7 @@ def main_window():
     screen.button_4.pack(padx=20, pady=10)
 
     # Default password frame
-    frame_right = customtkinter.CTkScrollableFrame(master=screen)
+    frame_right = customtkinter.CTkFrame(master=screen)
     frame_right.pack(side='right', padx=20, pady=20, fill='both', expand=True)
 
     # withdrawing the root window, which was for master password

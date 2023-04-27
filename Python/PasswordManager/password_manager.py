@@ -53,7 +53,7 @@ def check_master(input):
 def display_pw(passwords, master):
     # GUI implementation
     # global variables
-    global password_frame, text_widget
+    global password_frame, text_widget, header_widget
 
     # if a password frame already exists, destroy all widgets, Allows for updating data without creating new frames.
     if not password_frame:
@@ -65,14 +65,27 @@ def display_pw(passwords, master):
             widget.destroy()
 
     # creating widget for password list, configuring settings
-    text_widget = tkinter.Text(password_frame, wrap='word')
-    text_widget.configure(font=("Source Code Pro Medium", 10), bg="#212121", fg='white' , borderwidth=0 ,highlightbackground="#212121", highlightcolor='#212121', highlightthickness=0)
-    text_widget.pack(fill='both', expand=True)
+    # text_widget = tkinter.Text(password_frame, wrap='word')
+    # text_widget.configure(font=("Source Code Pro Medium", 10), bg="#212121", fg='white' , borderwidth=0 ,highlightbackground="#212121", highlightcolor='#212121', highlightthickness=0)
+    # text_widget.pack(fill='both', expand=True)
+
+    header_widget = customtkinter.CTkFrame(password_frame)
+    header_widget.pack(fill='both', expand=True)
+    header_label = customtkinter.CTkLabel(header_widget, font=("Source Code Pro Medium", 12), text=f"{'Index':<10} {'Website':<20} {'Username':<20} {'Password':<30} {'Date Modified':<20} {'Date Added':<20}\n")
+    #header_widget.insert('end', f"{'Index':<10} {'Website':<20} {'Username':<20} {'Password':<30} {'Date Modified':<20} {'Date Added':<20}\n")
+    header_label.grid(sticky='w')
+    # header_widget.grid_columnconfigure(0, weight=1)
+    # header_widget.pack_propagate(0)  
+
+    text_widget = customtkinter.CTkTextbox(header_widget, font=("Source Code Pro Medium", 12))
+    text_widget.grid(row=1, column=0, sticky='nsew')
+
+    header_widget.grid_columnconfigure(0, minsize=text_widget.winfo_width())
     
     # header formatting, with line to separate headers from data. 
     # header_len = len(f"{'Index':<10} {'Website':<30} {'Username':<20} {'Password':<40} {'Date Modified':<20} {'Date Added':<20}")
-    header_line = '-' * 118
-    text_widget.insert('end', f"{'Index':<10} {'Website':<20} {'Username':<20} {'Password':<30} {'Date Modified':<20} {'Date Added':<20}\n" + header_line + "\n", 'header')
+    #header_line = '-' * 118
+    #text_widget.insert
 
     #display logic
     for i, password in enumerate(passwords, start=1):
