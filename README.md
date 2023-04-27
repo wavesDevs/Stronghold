@@ -30,4 +30,4 @@ A Python based password manager.
 <img src = "https://imgur.com/LChYbG7.png">
 
 ### Main Window
-<img src = "https://imgur.com/tvRJCo1.png">
+<img src = "https://imgur.com/YJ9t8g5.png">
