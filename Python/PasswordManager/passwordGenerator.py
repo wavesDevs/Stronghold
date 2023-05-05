@@ -6,9 +6,15 @@ symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
 def pass_gen():
 
-  nr_letters= int(input("How many letters would you like to use?\n")) 
-  nr_symbols = int(input(f"How many symbols?\n"))
-  nr_numbers = int(input(f"And finally, how many numbers?\n"))
+  # # this generator used to ask the user for input in console like this
+  # nr_letters= int(input("How many letters would you like to use?\n")) 
+  # nr_symbols = int(input(f"How many symbols?\n"))
+  # nr_numbers = int(input(f"And finally, how many numbers?\n"))
+  
+  # #due to moving to GUI implementation, and for the sake of simplying development, i am hard coding these numbers   
+  nr_letters = 12
+  nr_symbols = 4
+  nr_numbers = 4
 
 #Password Generation Logic
   strPass = ''

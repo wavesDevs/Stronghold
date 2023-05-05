@@ -27,6 +27,34 @@ passwords = [
     "website" : "www.youtube.com",
     "date_modified" : datetime.datetime(2023, 4, 13),
     "date_added" : datetime.datetime(2022, 1, 12)
+    },
+    {
+    "password" : "Test4",
+    "username" : "User4",
+    "website" : "www.reddit.com",
+    "date_modified" : datetime.datetime(2023, 4, 12),
+    "date_added" : datetime.datetime(2022, 1, 13)
+    },
+    {
+    "password" : "Test5",
+    "username" : "User5",
+    "website" : "www.twitter.com",
+    "date_modified" : datetime.datetime(2023, 4, 11),
+    "date_added" : datetime.datetime(2022, 1, 14)
+    },
+    {
+    "password" : "Test6",
+    "username" : "User6",
+    "website" : "www.netflix.com",
+    "date_modified" : datetime.datetime(2023, 4, 10),
+    "date_added" : datetime.datetime(2022, 1, 15)
+    },
+    {
+    "password" : "Test7",
+    "username" : "User7",
+    "website" : "www.spotify.com",
+    "date_modified" : datetime.datetime(2023, 4, 9),
+    "date_added" : datetime.datetime(2022, 1, 16)
     }
 ]
 
@@ -58,34 +86,22 @@ def display_pw(passwords, master):
     # if a password frame already exists, destroy all widgets, Allows for updating data without creating new frames.
     if not password_frame:
         password_frame = customtkinter.CTkFrame(master=master)
-        password_frame.pack(fill='both', expand=True, padx=20, pady=20)
+        password_frame.grid(row=0, column=0, sticky='nsew')
+        # password_frame.pack(fill='both', expand=True, padx=20, pady=20)
     else:
         # Clear the contents of the password frame
         for widget in password_frame.winfo_children():
             widget.destroy()
 
-    # creating widget for password list, configuring settings
-    # text_widget = tkinter.Text(password_frame, wrap='word')
-    # text_widget.configure(font=("Source Code Pro Medium", 10), bg="#212121", fg='white' , borderwidth=0 ,highlightbackground="#212121", highlightcolor='#212121', highlightthickness=0)
-    # text_widget.pack(fill='both', expand=True)
-
     header_widget = customtkinter.CTkFrame(password_frame)
-    header_widget.pack(fill='both', expand=True)
+    header_widget.grid(row=0, column=0, sticky='nsew')
     header_label = customtkinter.CTkLabel(header_widget, font=("Source Code Pro Medium", 12), text=f"{'Index':<10} {'Website':<20} {'Username':<20} {'Password':<30} {'Date Modified':<20} {'Date Added':<20}\n")
-    #header_widget.insert('end', f"{'Index':<10} {'Website':<20} {'Username':<20} {'Password':<30} {'Date Modified':<20} {'Date Added':<20}\n")
     header_label.grid(sticky='w')
-    # header_widget.grid_columnconfigure(0, weight=1)
-    # header_widget.pack_propagate(0)  
 
     text_widget = customtkinter.CTkTextbox(header_widget, font=("Source Code Pro Medium", 12))
     text_widget.grid(row=1, column=0, sticky='nsew')
 
     header_widget.grid_columnconfigure(0, minsize=text_widget.winfo_width())
-    
-    # header formatting, with line to separate headers from data. 
-    # header_len = len(f"{'Index':<10} {'Website':<30} {'Username':<20} {'Password':<40} {'Date Modified':<20} {'Date Added':<20}")
-    #header_line = '-' * 118
-    #text_widget.insert
 
     #display logic
     for i, password in enumerate(passwords, start=1):
@@ -107,26 +123,6 @@ def display_pw(passwords, master):
             date_added = datetime.datetime.strptime(password["date_added"], "%Y-%m-%d").strftime("%Y-%m-%d")
 
         text_widget.insert('end', f"{i:<10} {website:<20} {username:<20} {password_str:<30} {date_modified:<20} {date_added:<20}\n")
-
-#function to create a new password and append it to password list
-def create_pw(passwords):
-    website = input("Enter the website: ")
-    username = input("Enter the username: ")
-    
-    #allow the user to decide if they want a random password or custom one
-    choice = input("Would you like to 1) generate a random password, or 2) enter your own? Type 1, or 2, respectively: ")
-    if choice.lower() == '1':
-        password = passwordGenerator.pass_gen()
-    elif choice.lower() == '2':
-        password = input("Enter the password now: ")
-
-    date_added = datetime.date.today().strftime("%Y-%m-%d")
-    date_modified = datetime.date.today().strftime("%Y-%m-%d")
-    
-    #creating new_pw dictionary and appending it to the passwords list.
-    new_pw = {"website": website, "username": username, "password": password, "date_added": date_added, "date_modified" : date_modified}    
-    passwords.append(new_pw)
-    print(f"Password for {website} successfully saved!")
 
 #function to edit an existing password and update the password list
 def edit_pw(passwords):
