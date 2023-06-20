@@ -4,8 +4,8 @@ A Python based password manager.
 ## Technologies
 - Python
 - Custom Tkinter
-- Bcrypt (To be implemented)
-- SQLite (To be implemented)
+- Bcrypt
+- SQLite
 
 ## Roadmap
 
